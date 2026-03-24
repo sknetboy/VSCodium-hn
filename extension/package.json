@@ -1,0 +1,68 @@
+{
+  "name": "vscodium-local-ai-assistant",
+  "displayName": "VSCodium Local AI Assistant",
+  "description": "Asistente IA local para VSCodium con backend propio y soporte Triton.",
+  "version": "0.1.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:localAiAssistant.openChat",
+    "onCommand:localAiAssistant.editWithAi",
+    "onLanguage:*"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "localAiAssistant.openChat",
+        "title": "Open AI Assistant"
+      },
+      {
+        "command": "localAiAssistant.editWithAi",
+        "title": "Edit Code with AI"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "localAiAssistant.openChat",
+        "key": "ctrl+u",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "localAiAssistant.editWithAi",
+        "key": "ctrl+i",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Local AI Assistant",
+      "properties": {
+        "localAiAssistant.backendUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:4000",
+          "description": "URL base del backend local"
+        },
+        "localAiAssistant.maxContextMessages": {
+          "type": "number",
+          "default": 20,
+          "description": "Cantidad máxima de mensajes para contexto"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "lint": "echo 'No linter configured'"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.5.4"
+  }
+}
